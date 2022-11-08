@@ -26,6 +26,13 @@ middleware(app);
 connectDB();
 //router
 app.use(`${url}`, router);
+
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'))
+}
+app.get('/api/v1/health', (req, res) => {
+	res.send('Health is ok!')
+})
 //listen to server
 app.listen(port, () =>
   console.log(`Server Running on port ${port}`.bgYellow.black)

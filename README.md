@@ -19,6 +19,11 @@
       -PORT : 2000
       -API_URL : api/v1/`${command}`
 
+#### API & SWAGGER LIVE LINK
+
+      -API  : https://football-player-profiling.onrender.com
+      -SWAGGER LINK : https://football-player-profiling.onrender.com/docs/
+
 
 
 ##### ASSESSMENT QUESTION

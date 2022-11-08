@@ -186,3 +186,414 @@ paths:
                         example: SkjsdnskdKJSKJakj(32423422sfdsjkdjLdsdsdskhG3sd0934djkhxz                      
       security:
         - bearerAuth: []  
+  /user/logout:
+    get:
+      tags:
+        - user
+      operationId: logoutUser
+      summary: Logout a user
+      description: Logout a user
+      responses:
+        '200':
+          description: A successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: success
+                    example: success
+                  data:
+                    type: object
+                    description: data
+                    properties:
+                      message:
+                        type: string
+                        description: logout message
+                        example: User successfully logged out              
+      security:
+        - bearerAuth: []  
+  /profile:
+    post:
+      tags:
+        - profile
+      operationId: create a player's profile
+      summary: Create a player's profile
+      description: Create a player's profile 
+      requestBody:
+        description: Create a player's 
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: user name
+                  example: Jones Asare
+                birthplace:
+                  type: string
+                  description: birth place of player
+                  example: Ghana
+                age: 
+                  type: number
+                  description: age of player
+                  example: 35
+                image:
+                  type: string
+                  description: image of player
+                  example: /https://imgbb.com/
+                images:
+                  type: string
+                  description: images associated to player
+                  example: /https://imgbb.com/ /https://imgbb.com/
+                height:
+                  type: string
+                  description: height of player
+                  example: 6 feet
+                foot:
+                  type: string
+                  description: preferred foot
+                  example: right
+                position:
+                  type: string
+                  description: position of play
+                  example: center-forward
+                currentClub:
+                  type: string
+                  description: current football club 
+                  example: chelsea
+                joined:
+                  type: string
+                  description: date on which the player joined the curernt club
+                  example: 19th-June-2012
+                contractExpiry:
+                  type: string
+                  description: date of contract expiry 
+                  example: 19th-April-2025
+                dateCreated:
+                  type: string
+                  description: time the profile was created
+                  example: 8th-November-2022
+      responses:
+        '201':
+          description: A successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: success
+                    example: success
+                  data:
+                    type: object
+                    description: data
+                    properties:
+                      userId:
+                        type: integer
+                        description: user id
+                        example: 10
+                      name:
+                        type: string
+                        description: user name
+                        example: Jones Asare
+                      birthplace:
+                        type: string
+                        description: birth place of player
+                        example: Ghana
+                      age: 
+                        type: number
+                        description: age of player
+                        example: 35
+                      image:
+                        type: string
+                        description: image of player
+                        example: /https://imgbb.com/
+                      images:
+                        type: string
+                        description: images associated to player
+                        example: /https://imgbb.com/ /https://imgbb.com/
+                      height:
+                        type: string
+                        description: height of player
+                        example: 6 feet
+                      foot:
+                        type: string
+                        description: preferred foot
+                        example: right
+                      position:
+                        type: string
+                        description: position of play
+                        example: center-forward
+                      currentClub:
+                        type: string
+                        description: current football club 
+                        example: chelsea
+                      joined:
+                        type: string
+                        description: date on which the player joined the curernt club
+                        example: 19th-June-2012
+                      contractExpiry:
+                        type: string
+                        description: date of contract expiry 
+                        example: 19th-April-2025
+                      dateCreated:
+                        type: string
+                        description: time the profile was created
+                        example: 8th-November-2022
+      security:
+        - bearerAuth: []  
+    get:
+      tags:
+        - profile
+      operationId: get all player profile
+      summary: Get all player profile
+      description: Get all player profile 
+      responses:
+        '201':
+          description: A successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: success
+                    example: success
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        userId:
+                          type: integer
+                          description: user id
+                          example: 10
+                        name:
+                          type: string
+                          description: user name
+                          example: Jones Asare
+                        birthplace:
+                          type: string
+                          description: birth place of player
+                          example: Ghana
+                        age: 
+                          type: number
+                          description: age of player
+                          example: 35
+                        image:
+                          type: string
+                          description: image of player
+                          example: /https://imgbb.com/
+                        images:
+                          type: string
+                          description: images associated to player
+                          example: /https://imgbb.com/ /https://imgbb.com/
+                        height:
+                          type: string
+                          description: height of player
+                          example: 6 feet
+                        foot:
+                          type: string
+                          description: preferred foot
+                          example: right
+                        position:
+                          type: string
+                          description: position of play
+                          example: center-forward
+                        currentClub:
+                          type: string
+                          description: current football club 
+                          example: chelsea
+                        joined:
+                          type: string
+                          description: date on which the player joined the curernt club
+                          example: 19th-June-2012
+                        contractExpiry:
+                          type: string
+                          description: date of contract expiry 
+                          example: 19th-April-2025
+                        dateCreated:
+                          type: string
+                          description: time the profile was created
+                          example: 8th-November-2022
+      security:
+        - bearerAuth: []  
+  /profile/:{profileId}:
+    patch:
+      tags:
+        - profile
+      operationId: update a player's profile
+      summary: Update a player's profile
+      description: Update a player's profile
+      parameters:
+      - in : path
+        name : profileId
+        schema:
+          type: integer
+        required: true
+        description : Numeric ID of the profile to get
+      requestBody:
+        description: Update a player's profile
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: user name
+                  example: Jones Asare
+                birthplace:
+                  type: string
+                  description: birth place of player
+                  example: Ghana
+                age: 
+                  type: number
+                  description: age of player
+                  example: 35
+                image:
+                  type: string
+                  description: image of player
+                  example: /https://imgbb.com/
+                images:
+                  type: string
+                  description: images associated to player
+                  example: /https://imgbb.com/ /https://imgbb.com/
+                height:
+                  type: string
+                  description: height of player
+                  example: 6 feet
+                foot:
+                  type: string
+                  description: preferred foot
+                  example: right
+                position:
+                  type: string
+                  description: position of play
+                  example: center-forward
+                currentClub:
+                  type: string
+                  description: current football club 
+                  example: chelsea
+                joined:
+                  type: string
+                  description: date on which the player joined the curernt club
+                  example: 19th-June-2012
+                contractExpiry:
+                  type: string
+                  description: date of contract expiry 
+                  example: 19th-April-2025
+                dateCreated:
+                  type: string
+                  description: time the profile was created
+                  example: 8th-November-2022
+      responses:
+        '201':
+          description: A successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: success
+                    example: success
+                  data:
+                    type: object
+                    description: data
+                    properties:
+                      userId:
+                        type: integer
+                        description: user id
+                        example: 10
+                      name:
+                        type: string
+                        description: user name
+                        example: Jones Asare
+                      birthplace:
+                        type: string
+                        description: birth place of player
+                        example: Ghana
+                      age: 
+                        type: number
+                        description: age of player
+                        example: 35
+                      image:
+                        type: string
+                        description: image of player
+                        example: /https://imgbb.com/
+                      images:
+                        type: string
+                        description: images associated to player
+                        example: /https://imgbb.com/ /https://imgbb.com/
+                      height:
+                        type: string
+                        description: height of player
+                        example: 6 feet
+                      foot:
+                        type: string
+                        description: preferred foot
+                        example: right
+                      position:
+                        type: string
+                        description: position of play
+                        example: center-forward
+                      currentClub:
+                        type: string
+                        description: current football club 
+                        example: chelsea
+                      joined:
+                        type: string
+                        description: date on which the player joined the curernt club
+                        example: 19th-June-2012
+                      contractExpiry:
+                        type: string
+                        description: date of contract expiry 
+                        example: 19th-April-2025
+                      dateCreated:
+                        type: string
+                        description: time the profile was created
+                        example: 8th-November-2022
+      security:
+        - bearerAuth: [] 
+    delete:
+      tags:
+        - profile
+      operationId: delete a player's profile
+      summary: Delete a player's profile
+      description: Delete a player's profile
+      parameters:
+      - in : path
+        name : profileId
+        schema:
+          type: integer
+        required: true
+        description : Numeric ID of the profile to get
+      responses:
+        '200':
+          description: A successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: success
+                    example: success
+                  data:
+                    type: object
+                    description: data
+                    properties:
+                      message:
+                        type: string
+                        description: responses
+                        example: success
+      security:
+        - bearerAuth: [] 

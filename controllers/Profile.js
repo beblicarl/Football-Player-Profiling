@@ -4,7 +4,6 @@ const profile = require("../model/profile");
 //@Route POST api/v1/product
 //@access Private
 exports.addProfile = async (req, res, next) => {
-  console.log(req.body)
   try {
     
     const playerProfileData = await profile.create({

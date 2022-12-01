@@ -27,13 +27,8 @@ exports.registerUser = async (req, res, next) => {
       name: req.body.name,
       email: req.body.email,
       password,
-      street: req.body.street,
-      apartment: req.body.apartment,
       city: req.body.city,
-      zip: req.body.zip,
-      country: req.body.country,
-      phone: req.body.phone,
-      isAdmin: req.body.isAdmin,
+      phone: req.body.phone
     });
 
     await userData.save();
@@ -69,6 +64,7 @@ exports.getAllUser = async (req, res, next) => {
 exports.loginUser = async (req, res, next) => {
   try {
     //find user in the data base
+    console.log(req)
     const userData = await user.findOne({
       email: req.body.email,
     });
@@ -80,8 +76,9 @@ exports.loginUser = async (req, res, next) => {
 
     if (userData && bcrypt.compareSync(req.body.password, userData.password)) {
       let token = jwt.sign(
-        { userId: userData._id, isAdmin: user.isAdmin },
-        process.env.SECRET
+        { userId: userData._id },
+        process.env.SECRET,
+        {expiresIn: 60 * 2, algorithm: 'HS256' }
       );
       return await res
         .status(200)

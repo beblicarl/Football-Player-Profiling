@@ -18,23 +18,7 @@ const UserSchema = new Schema({
     type: String,
     required: [true, "Please Add your Password to Protect Your Data"],
   },
-  street: {
-    type: String,
-    default: "",
-  },
-  apartment: {
-    type: String,
-    default: "",
-  },
   city: {
-    type: String,
-    default: "",
-  },
-  zip: {
-    type: String,
-    default: "",
-  },
-  country: {
     type: String,
     default: "",
   },
@@ -44,11 +28,7 @@ const UserSchema = new Schema({
       /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/,
       "Please Input a valid Phone Number",
     ],
-  },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
+  }
 });
 
 module.exports = mongoose.model("user", UserSchema);

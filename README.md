@@ -21,8 +21,8 @@
 
 #### API & SWAGGER LIVE LINK
 
-      -API  : https://football-player-profiling.onrender.com
-      -SWAGGER LINK : https://football-player-profiling.onrender.com/docs/
+      -API  : https://web-production-dcc2.up.railway.app/
+      -SWAGGER LINK : https://web-production-dcc2.up.railway.app/docs/
 
 
 

@@ -41,34 +41,14 @@ paths:
                   type: string
                   description: user password
                   example: Modestrighteous1$
-                street:
-                  type: string
-                  description: location of user
-                  example: legon
-                apartment:
-                  type: string
-                  description: apartment user lives in
-                  example: silvertowers
                 city:
                   type: string
                   description: city user lives in
                   example: legon
-                zip:
-                  type: number
-                  description: zip code
-                  example : 2233
-                country:
-                  type: string
-                  description: country of residence
-                  example: Hungary
                 phone:
                   type: number
                   description: contact number of user
                   example: +223 2232 334
-                isAdmin:
-                  type: boolean
-                  description: admin user
-                  example: true
       responses:
         '201':
           description: A successful operation
@@ -102,34 +82,14 @@ paths:
                         type: string
                         description: user password
                         example: Modestrighteous1$
-                      street:
-                        type: string
-                        description: location of user
-                        example: legon
-                      apartment:
-                        type: string
-                        description: apartment user lives in
-                        example: silvertowers
                       city:
                         type: string
                         description: city user lives in
                         example: legon
-                      zip:
-                        type: number
-                        description: zip code
-                        example : 2233
-                      country:
-                        type: string
-                        description: country of residence
-                        example: Hungary
                       phone:
                         type: number
                         description: contact number of user
                         example: +223 2232 334
-                      isAdmin:
-                        type: boolean
-                        description: admin user
-                        example: true
                       createdOn:
                         type: string
                         description: time a user was created

@@ -1,4 +1,5 @@
 const profile = require("../model/profile");
+const { transformPlayerResponse } = require("../common/transform")
 
 //@Desc Add Profile
 //@Route POST api/v1/product
@@ -18,14 +19,16 @@ exports.addProfile = async (req, res, next) => {
       currentClub: req.body.currentClub,
       joined: req.body.joined,
       contractExpiry: req.body.contractExpiry,
-      dateCreated: new Date(),
+
     });
     
     await playerProfileData.save()
   
     await res.status(200).json({
       success: true,
-      data: playerProfileData,
+      data: {
+      ...transformPlayerResponse(playerProfileData)
+      },
     });
   } catch (err) {
     console.log(err)
@@ -34,7 +37,7 @@ exports.addProfile = async (req, res, next) => {
 };
 //@Desc Get Profile
 //@Route GET api/v1/profile/:id
-//@Access Public
+//@Access Private
 exports.getSingleProfile = async (req, res, next) => {
   try {
     const playerProfileData = await profile
@@ -42,17 +45,19 @@ exports.getSingleProfile = async (req, res, next) => {
 
     await res.status(200).json({
       success: true,
-      data: playerProfileData,
+      data: {
+        ...transformPlayerResponse(playerProfileData)
+      },
     });
   } catch (err) {
     console.log(err)
     res.status(500).send(err);
   }
 };
-//@Desc Get All Profile
+//@Desc Get All Profiles
 //@Route GET api/v1/profile
-//@Access Public
-exports.getProfile = async (req, res, next) => {
+//@Access Private
+exports.getAllProfiles = async (req, res, next) => {
   try {
 
     const playerProfileData = await profile.find().sort({ createdAt: "desc" })
@@ -84,15 +89,17 @@ exports.updateProfile = async (req, res, next) => {
         position: req.body.position,
         currentClub: req.body.currentClub,
         joined: req.body.joined,
-        contractExpiry: req.body.contractExpiry,
-        dateCreated: new Date(),
+        contractExpiry: req.body.contractExpiry
       },
       { new: true }
     );
     await playerProfileData.save();
     await res.status(200).json({
       success: true,
-      data: playerProfileData,
+      data: {
+      ...transformPlayerResponse(playerProfileData),
+      updatedAt : playerProfileData.updatedAt
+      },
     });
   } catch (err) {
     console.log(err)
@@ -105,9 +112,9 @@ exports.updateProfile = async (req, res, next) => {
 //@Access Private
 exports.deleteProfile = async (req, res, next) => {
   try {
-    const playerProfileData = await profile.findByIdAndDelete(req.params.id);
-    if (!playerProfileData) res.status(404).send("Profile Not Found");
-    res.status(200).send(playerProfileData);
+    const playerProfileData = await profile.findByIdAndRemove(req.params.id);
+    if (!playerProfileData) res.status(404)
+    res.status(200).send("Player profile successfully deleted");
   } catch (err) {
     res.status(500).send(err);
   }

@@ -13,6 +13,7 @@ const UserSchema = new Schema({
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
       "Please Add a Valid Email",
     ],
+    unique: true
   },
   password: {
     type: String,
@@ -20,7 +21,6 @@ const UserSchema = new Schema({
   },
   city: {
     type: String,
-    default: "",
   },
   phone: {
     type: Number,

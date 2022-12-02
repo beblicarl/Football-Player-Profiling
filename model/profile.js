@@ -39,10 +39,10 @@ const playerProfileSchema = new Schema({
   contractExpiry: {
     type: String,
   },
-  dateCreated: {
-    type: Date,
-    default: new Date(),
+},
+  {
+    timestamps: true
   },
-});
+);
 
 module.exports = mongoose.model("profile", playerProfileSchema);

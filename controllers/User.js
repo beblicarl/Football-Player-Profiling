@@ -8,17 +8,11 @@ const endSession = require("../utils")
 exports.registerUser = async (req, res, next) => {
   try {
     //validate user to find if the data is registered in the database
-    const userDataFound = await user.findOne({
-      email: req.body.email,
-      name: req.body.name,
-    });
-    console.log(userDataFound);
-    if (userDataFound)
-      return await res
-        .status(401)
-        .send(
-          `User Already Register with ${req.body.email} and ${req.body.name}`
-        );
+    
+    const { email } = req.body;
+    let data = await user.findOne({ email });
+    if (data) return res.status(400).send("User already registered.");
+
 
     //encrypt password data
     let password = bcrypt.hashSync(req.body.password, 10);
@@ -34,7 +28,12 @@ exports.registerUser = async (req, res, next) => {
     await userData.save();
     await res.status(200).json({
       success: true,
-      data: userData,
+      data: {
+        _id : userData._id,
+        name: userData.name,
+        email: userData.email,
+        city : userData.city
+      },
     });
   } catch (err) {
     res.status(400).send(err);
@@ -42,7 +41,7 @@ exports.registerUser = async (req, res, next) => {
 };
 //@Desc get a User
 //@Route GET api/v1/user/
-//@Access Public
+//@Access Private
 exports.getAllUser = async (req, res, next) => {
   console.log(req)
   try {
@@ -60,7 +59,7 @@ exports.getAllUser = async (req, res, next) => {
 };
 //@Desc login a user
 //@Route POST api/v1/user/login
-//@Access Private
+//@Access Public
 exports.loginUser = async (req, res, next) => {
   try {
     //find user in the data base
@@ -78,7 +77,7 @@ exports.loginUser = async (req, res, next) => {
       let token = jwt.sign(
         { userId: userData._id },
         process.env.SECRET,
-        {expiresIn: 60 * 2, algorithm: 'HS256' }
+        {expiresIn: 120 * 2, algorithm: 'HS256' }
       );
       return await res
         .status(200)

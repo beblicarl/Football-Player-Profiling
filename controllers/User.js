@@ -1,7 +1,7 @@
 const user = require("../model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const endSession = require("../utils")
+
 //@Desc Register a User
 //@Route POST api/v1/user/register
 //@Access Public
@@ -76,9 +76,12 @@ exports.loginUser = async (req, res, next) => {
     if (userData && bcrypt.compareSync(req.body.password, userData.password)) {
       let token = jwt.sign(
         { userId: userData._id },
-        process.env.SECRET,
-        {expiresIn: 120 * 2, algorithm: 'HS256' }
-      );
+        process.env.SECRET);
+
+        res.cookie("token", token, {
+          expiresIn: 120 * 2, algorithm: 'HS256'
+        })
+       
       return await res
         .status(200)
         .send({ Message: `Welcome ${userData.name}`, token });
@@ -92,9 +95,9 @@ exports.loginUser = async (req, res, next) => {
 //@Route POST api/v1/user/logout
 //@Access Private
 exports.logoutUser = async (req, res, next) => {
-  console.log(res.cookie)
+
  try {
-    endSession()
+    res.clearCookie("token")
     return await res
         .status(200)
         .send({ Message: `User has been logged out`});

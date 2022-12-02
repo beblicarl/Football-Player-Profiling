@@ -12,7 +12,7 @@
 
       - Registering User
       - Log-in User
-      - Registering Admin User
+      
 
 ###### SERVER DETAIL & COMMAND
 

@@ -7,6 +7,7 @@ const router = require("./router/routes");
 const swaggerUI = require('swagger-ui-express')
 const fs = require('fs')
 const YAML = require('yaml')
+const cookieParser = require('cookie-parser')
 
 //api docs
 const file = fs.readFileSync('./docs/swagger.yaml', 'utf8')
@@ -21,6 +22,8 @@ app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 // enviromwnt variable
 const url = process.env.API_URL;
 const port = process.env.PORT;
+//cookie parser
+app.use(cookieParser());
 //middleware
 middleware(app);
 connectDB();

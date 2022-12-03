@@ -31,7 +31,7 @@ exports.addProfile = async (req, res, next) => {
       },
     });
   } catch (err) {
-    console.log(err)
+    console.log(err.message)
     res.status(500).send(err);
   }
 };
@@ -50,7 +50,7 @@ exports.getSingleProfile = async (req, res, next) => {
       },
     });
   } catch (err) {
-    console.log(err)
+    console.log(err.message)
     res.status(500).send(err);
   }
 };
@@ -102,7 +102,7 @@ exports.updateProfile = async (req, res, next) => {
       },
     });
   } catch (err) {
-    console.log(err)
+    console.log(err.message)
     res.status(500).send(err);
   }
 };

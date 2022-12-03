@@ -6,12 +6,14 @@
 
       - Adding Profile
       - Delete Profile
-      - update Profile
+      - Update Profile
+      - Get individual profile
 
 ###### USER FEATURES
 
       - Registering User
       - Log-in User
+      - Log-out User
       
 
 ###### SERVER DETAIL & COMMAND

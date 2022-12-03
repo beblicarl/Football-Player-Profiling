@@ -11,6 +11,7 @@ function auth() {
     path: [
       `${api}user/login`,
       `${api}user/register`,
+      `${api}health`,
     ],
   });
 }

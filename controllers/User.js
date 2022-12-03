@@ -76,10 +76,13 @@ exports.loginUser = async (req, res, next) => {
     if (userData && bcrypt.compareSync(req.body.password, userData.password)) {
       let token = jwt.sign(
         { userId: userData._id },
-        process.env.SECRET);
+        process.env.SECRET,
+        {expiresIn: 360 * 2, algorithm : 'HS256' }
+        
+        );
 
         res.cookie("token", token, {
-          expiresIn: 120 * 2, algorithm: 'HS256'
+          expire: 360 * 2 + Date.now()
         })
        
       return await res

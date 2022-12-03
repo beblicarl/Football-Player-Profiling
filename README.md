@@ -22,6 +22,7 @@
 #### API & SWAGGER LIVE LINK
 
       -API  : https://web-production-dcc2.up.railway.app/
+      -API HEALTH : https://web-production-dcc2.up.railway.app/health
       -SWAGGER LINK : https://web-production-dcc2.up.railway.app/docs/
 
 

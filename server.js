@@ -32,6 +32,13 @@ connectDB();
 app.use(`${url}`, router);
 
 //error
+
+app.all('*', (req, res, next) => {
+	const err = 
+		`Cannot find the requested url `
+	
+	next(err)
+})
 app.use(error)
 
 if (process.env.NODE_ENV === 'development') {

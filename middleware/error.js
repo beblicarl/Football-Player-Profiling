@@ -33,7 +33,6 @@ const handleErrorForDuplicateFields = (error) => {
 	return new AppError(message, 400)
 }
 
-// eslint-disable-next-line no-unused-vars
 module.exports = (err, req, res, next) => {
 	
 	let error = err

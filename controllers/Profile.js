@@ -32,7 +32,7 @@ exports.addProfile = async (req, res, next) => {
     });
   } catch (err) {
     console.log(err.message)
-    res.status(500).send(err);
+    res.status(500).send(err.message);
   }
 };
 //@Desc Get Profile
@@ -51,7 +51,7 @@ exports.getSingleProfile = async (req, res, next) => {
     });
   } catch (err) {
     console.log(err.message)
-    res.status(500).send(err);
+    res.status(500).send(err.message);
   }
 };
 //@Desc Get All Profiles
@@ -64,10 +64,12 @@ exports.getAllProfiles = async (req, res, next) => {
 
     await res.status(200).json({
       success: true,
-      data: playerProfileData,
+      data: playerProfileData.map((playerProfiles) => ({
+        ...transformPlayerResponse(playerProfiles)
+      })),
     });
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(err.message);
   }
 };
 //@Desc update profile by id
@@ -103,7 +105,7 @@ exports.updateProfile = async (req, res, next) => {
     });
   } catch (err) {
     console.log(err.message)
-    res.status(500).send(err);
+    res.status(500).send(err.message);
   }
 };
 
@@ -116,6 +118,6 @@ exports.deleteProfile = async (req, res, next) => {
     if (!playerProfileData) res.status(404)
     res.status(200).send("Player profile successfully deleted");
   } catch (err) {
-    res.status(500).send(err);
+    res.status(500).send(err.message);
   }
 };

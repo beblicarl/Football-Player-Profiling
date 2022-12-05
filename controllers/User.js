@@ -2,6 +2,8 @@ const user = require("../model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const {transformUserResponse} = require("../common/transform")
+
 //@Desc Register a User
 //@Route POST api/v1/user/register
 //@Access Public
@@ -29,14 +31,11 @@ exports.registerUser = async (req, res, next) => {
     await res.status(200).json({
       success: true,
       data: {
-        _id : userData._id,
-        name: userData.name,
-        email: userData.email,
-        city : userData.city
+        ...transformUserResponse(userData)
       },
     });
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send(err.message);
   }
 };
 //@Desc get a User
@@ -51,10 +50,12 @@ exports.getAllUser = async (req, res, next) => {
   console.log(userData)
     await res.status(200).json({
       success: true,
-      data: userData,
+      data: userData.map((userProfiles) => ({
+        ...transformUserResponse(userProfiles)
+      })),
     });
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send(err.message);
   }
 };
 //@Desc login a user
@@ -90,7 +91,7 @@ exports.loginUser = async (req, res, next) => {
         .send({ Message: `Welcome ${userData.name}`, token });
     }
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send(err.message);
   }
 };
 
@@ -106,7 +107,7 @@ exports.logoutUser = async (req, res, next) => {
         .send({ Message: `User has been logged out`});
   
  } catch (err) {
-  res.status(400).send(err);
+  res.status(400).send(err.message);
  }
 
 }

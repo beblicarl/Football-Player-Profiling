@@ -8,6 +8,7 @@ const swaggerUI = require('swagger-ui-express')
 const fs = require('fs')
 const YAML = require('yaml')
 const cookieParser = require('cookie-parser')
+const error = require("./middleware/error")
 
 //api docs
 const file = fs.readFileSync('./docs/swagger.yaml', 'utf8')
@@ -29,6 +30,9 @@ middleware(app);
 connectDB();
 //router
 app.use(`${url}`, router);
+
+//error
+app.use(error)
 
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'))

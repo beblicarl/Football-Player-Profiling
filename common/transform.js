@@ -15,6 +15,15 @@ const transformPlayerResponse = (playerProfileData) => ({
       createdAt : playerProfileData.createdAt
 })
 
+const transformUserResponse = (userData) => ({
+    _id : userData._id,
+    name: userData.name,
+    email: userData.email,
+    city : userData.city,
+    phone: userData.phone
+})
+
 module.exports = {
-    transformPlayerResponse
+    transformPlayerResponse,
+    transformUserResponse
 }

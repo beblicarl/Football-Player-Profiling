@@ -81,6 +81,8 @@ exports.updateProfile = async (req, res, next) => {
     const playerProfileData = await profile.findByIdAndUpdate(
       req.params.id,
       {
+        $set :
+      {
         name: req.body.name,
         birthplace: req.body.birthplace,
         age: req.body.age,
@@ -92,7 +94,8 @@ exports.updateProfile = async (req, res, next) => {
         currentClub: req.body.currentClub,
         joined: req.body.joined,
         contractExpiry: req.body.contractExpiry
-      },
+      }
+     },
       { new: true }
     );
     await playerProfileData.save();
